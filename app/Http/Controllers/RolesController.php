@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Role;
 use App\Models\Permission;
+use App\Models\User;
 use App\Http\Requests;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Collection;
 
 class RolesController extends Controller
 {
@@ -17,8 +19,15 @@ class RolesController extends Controller
     public function index()
     {
         $roles = Role::all();
-        $permissions = Permission::all();
-        return view('acl.roles.index', compact('roles', 'permissions'));
+        $permissionsDb = Permission::all();
+        foreach ($permissionsDb as $key => $permission) :
+            list($group, $module, $action) = explode('.', $permission->name);
+            $allPermissions[$group][$permission->id]['id'] = $permission->id;
+            $allPermissions[$group][$permission->id]['display_name'] = $permission->display_name;
+            $allPermissions[$group][$permission->id]['action'] = $action;
+            $allPermissions[$group][$permission->id]['module'] = $module;
+        endforeach;
+        return view('acl.roles.index', compact('roles', 'allPermissions'));
     }
 
     /**
@@ -44,7 +53,7 @@ class RolesController extends Controller
         ]);
 
         Role::create($request->all());
-        return redirect()->route('roles')->withSuccess('The Role has been created.');
+        return redirect()->route('roles.index')->withSuccess('El rol ha sido creado.');
     }
 
     /**
@@ -90,5 +99,66 @@ class RolesController extends Controller
 
         $role->forceDelete();
         return redirect()->route('role_index');
+    }
+    public function assigned(Request $request)
+    {
+
+        try {
+            $user = User::findOrFail($request->user_id);
+            $roles = $user->roles;
+            $notAssigned = $this->rolesNotAssigned($roles);
+            return response()->json([
+                'assigned' => $roles,
+                'status' => 'success'
+            ]);
+        } catch (Exception $e) {
+            return response()->json([
+                'assigned' => '',
+                'status' => 'error',
+                'message' => $e
+            ]);
+        }
+    }
+
+    /**
+     * Get permissions not assigned.
+     * @param  Collection $roles
+     * @return array
+     */
+    public function rolesNotAssigned($roles)
+    {
+        $rolesAll = Role::all();
+        $notAssigned = $rolesAll->diff($roles);
+        return $notAssigned->all();
+    }
+
+    /**
+     * Se agrega roles a la persona.
+     * @param  Request $request
+     * @return JSON
+     */
+    public function assign(Request $request)
+    {
+        $user = User::findOrFail($request->user_id);
+        $user->attachRole($request->role_id);
+        return response()->json([
+            'message' => 'Rol asignado correctamente',
+            'status' => 'success',
+        ]);
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     * @param  Request $request
+     * @return JSON
+     */
+    public function remove(Request $request)
+    {
+        $user = User::findOrFail($request->user_id);
+        $user->detachRole($request->role_id);
+
+        return response()->json([
+            'message' => 'Role has been removed'
+        ]);
     }
 }

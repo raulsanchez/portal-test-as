@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+
     <div class="row">
         <div class="col-md-12">
             <div style="margin-bottom: 50px">
@@ -17,10 +18,10 @@
                 <thead>
                     <tr>
                         <th>#</th>
-                        <th>Name</th>
-                        <th>Description</th>
-                        <th>Permissions</th>
-                        <th>Actions</th>
+                        <th>Identificador</th>
+                        <th>Descripción</th>
+                        <th>Permisos</th>
+                        <th>Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -32,14 +33,14 @@
                             <td>
                             {{-- @if(Auth::check()) --}}
                                 {{-- @if(Auth::user()->hasRole('admin')) --}}
-                                    <button type="button" class="btn btn-info btn-xs get-perms" role_id="{{ $role->id }}" data-toggle="modal" data-target=".permissions-modal">Permissions</button>
+                                    <button type="button" class="btn btn-info btn-xs get-perms" role_id="{{ $role->id }}" data-toggle="modal" data-target=".permissions-modal">Permisos</button>
                                 {{-- @endif --}}
                             {{-- @endif --}}
                             </td>
                             <td>
-                                <a href="{{ route('roles.edit', $role) }}" class=""><i class="glyphicon glyphicon-pencil"></i></a>
+                                <a href="{{ route('roles.edit', $role) }}" class=""><i class="fa fa-pencil" aria-hidden="true"></i></a>
                                 @permission('delete_roles')
-                                    <a href="{{route('roles.distroy', $role)}}" data-method="delete" data-token="{{csrf_token()}}" data-confirm="Are you sure?"><i class="glyphicon glyphicon-trash"></i></a>
+                                    <a href="{{route('roles.distroy', $role)}}" data-method="delete" data-token="{{csrf_token()}}" data-confirm="¿Está seguro?"><i class="fa fa-trash" aria-hidden="true"></i></a>
                                 @endpermission
                             </td>
                         </tr>
@@ -49,9 +50,11 @@
         </div>
     </div>
     @include('acl.roles.permissions.modal')
+@stop
+
+@section('script')
     <script>
-    $(document).on('ready', function(){
-        console.log('llega');
+    $( document ).ready( function(){
         $.ajaxSetup(
         {
             headers:
@@ -61,8 +64,8 @@
         });
 
         $('#select-perms').multiSelect({
-            selectableHeader: "<div class='custom-header'>Selectable items</div>",
-            selectionHeader: "<div class='custom-header'>Selection items</div>",
+            selectableHeader: "<div class='custom-header'>Permisos Disponibles</div>",
+            selectionHeader: "<div class='custom-header'>Permisos Asignados</div>",
             afterSelect: function (value){
                 $.ajax({
                     url: '{{ URL::to("/permissions/assign") }}',
@@ -87,7 +90,7 @@
                         role_id: role_id
                     }
                 }).done(function (data) {
-
+                    $('#select-perms')
                 });
             }
 
@@ -97,18 +100,19 @@
             role_id = $(this).attr('role_id');
             $('#select-perms').multiSelect('refresh');
             $('#select-perms option').attr('selected', false);
-               $.ajax({
-                url : '{{ URL::to("/permissions/assigned") }}',
-                type : 'GET',
-                dataType: 'json',
-                data : {role_id: role_id}
-            }).done(function(data){
-                $.each(data.assigned, function (index, value) {
-                    $('#select-perms option[value="'+value.id+'"]').attr('selected', true);
+                $.ajax({
+                    url : '{{ URL::to("/permissions/assigned") }}',
+                    type : 'GET',
+                    dataType: 'json',
+                    data : {role_id: role_id}
+                }).done(function(data){
+                    console.log(data);
+                    $.each(data.assigned, function (index, value) {
+                        $('#select-perms option[value="'+value.id+'"]').attr('selected', true);
+                    });
+                    $('#select-perms').multiSelect('refresh');
                 });
-                $('#select-perms').multiSelect('refresh');
             });
-        });
-    }); //ready
+        }); //ready
 </script>
 @stop

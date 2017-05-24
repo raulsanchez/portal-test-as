@@ -1,10 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
-        <div class="panel panel-info">
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-default">
             <div class="panel-heading">
-                Create Role
+                Crear Rol
             </div>
             <div class="panel-body">
                 <form action="{{ route('roles.store') }}" method="post" class="form-horizontal">
@@ -44,11 +45,12 @@
                     </div>
                     <div class="form-group">
                         <div class="col-sm-offset-2 col-sm-10">
-                          <button type="submit" class="btn btn-success">Create</button>
+                          <button type="submit" class="btn btn-success">Crear Rol</button>
                         </div>
                     </div>
                 </form>
             </div>
         </div>
     </div>
+</div>
 @stop
