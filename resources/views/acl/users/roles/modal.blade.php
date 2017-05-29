@@ -6,6 +6,7 @@
           <h4 class="modal-title">Roles</h4>
         </div>
         <div class="modal-body">
+            <input type="hidden" value="" id="LMroles">
             <select multiple="multiple" id="select-roles">
             @if ( isset($roles))
                 @foreach ($roles as $id => $role)

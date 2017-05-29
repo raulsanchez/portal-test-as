@@ -17,11 +17,8 @@ class UsersController extends Controller
      */
     public function index()
     {
-        $users = User::all();
+        $users = User::with(['roles'])->get();
         $roles = Role::all();
-        // $users->attachRole('3');
-        // dd($users);
-
         return view('acl.users.index', compact('users', 'roles'));
     }
 

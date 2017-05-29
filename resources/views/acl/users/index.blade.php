@@ -40,7 +40,7 @@
                             @endability
 
                             @ability('administrador', 'administracion.usuario.roles')
-                            <a href="#" data-toggle="modal" data-user_id="{{$user->id}}" id="LMroles" data-target="#Mroles">
+                            <a href="#" data-toggle="modal" data-user_id="{{$user->id}}" class="LMroles" data-target="#Mroles">
                                 <i class="fa fa-user-plus" aria-hidden="true"></i>
                             </a>
                             @endability
@@ -68,7 +68,7 @@
             selectableHeader: "<div class='custom-header'>Permisos Disponibles</div>",
             selectionHeader: "<div class='custom-header'>Permisos Asignados</div>",
             afterSelect: function (value){
-                var user_id = $('#LMroles').data('user_id');
+                var user_id = $('#LMroles').val();
                 $.ajax({
                     url: '{{route("roles.assign")}}',
                     type: 'POST',
@@ -83,8 +83,7 @@
             },
 
             afterDeselect: function (value){
-                var user_id = $('#LMroles').data('user_id');
-
+                var user_id = $('#LMroles').val();
                 $.ajax({
                     url: '{{route("roles.remove")}}',
                     type: 'DELETE',
@@ -100,8 +99,9 @@
 
         });
 
-        $('#LMroles').on('click', function(){
+        $('.LMroles').on('click', function(){
             var user_id = $(this).data('user_id');
+            $('#LMroles').val(user_id);
             $('#select-roles').multiSelect('refresh');
             $('#select-roles option').attr('selected', false);
                 $.ajax({
@@ -112,8 +112,6 @@
                 }).done(function(data){
                     $.each(data.assigned, function (index, value) {
                         console.log(value.id);
-
-                        console.log($('#select-roles option[value="'+value.id+'"]').attr('selected', true))
                         $('#select-roles option[value="'+value.id+'"]').attr('selected', true);
                     });
                     $('#select-roles').multiSelect('refresh');

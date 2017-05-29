@@ -12,6 +12,7 @@ use Illuminate\Support\Collection;
 
 class RolesController extends Controller
 {
+
     /**
      * Display a listing of the Roles.
      * @return \Illuminate\Http\Response
@@ -139,6 +140,7 @@ class RolesController extends Controller
      */
     public function assign(Request $request)
     {
+
         $user = User::findOrFail($request->user_id);
         $user->attachRole($request->role_id);
         return response()->json([

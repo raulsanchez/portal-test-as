@@ -10,11 +10,19 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+
+    // use Illuminate\Support\Facades\DB;
+
+    // DB::listen(function ($query) {
+    //     echo "<pre>".$query->sql.'<br>'.$query->time.'</pre>';
+    // });
+
 Route::group(['middleware' => ['auth']], function () {
+    Route::get('/menu', 'MenusController@generateMenu');
     Route::get('/', function () {
         return view('welcome');
     });
-
     Route::group(['prefix' => 'roles'], function () {
         Route::get('/assignedasd', 'RolesController@assigned')->name('roles.assigned');
         Route::post('/assign', 'RolesController@assign')->name('roles.assign');
@@ -29,6 +37,7 @@ Route::group(['middleware' => ['auth']], function () {
     });
     Route::resource('permissions', 'PermissionsController');
     Route::resource('users', 'UsersController');
+    Route::resource('modules', 'ModulesController');
 
     Route::resource('users_types', 'UsersTypesController');
 });

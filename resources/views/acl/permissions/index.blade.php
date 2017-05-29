@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+    @ability('administrador', 'administracion.permisos.crear')
     <div class="row">
         <div class="col-md-12">
             <div style="margin-bottom: 50px">
@@ -8,6 +9,7 @@
             </div>
         </div>
     </div>
+    @endability
     <div class="panel panel-default">
         <div class="panel-heading">
             Permisos

@@ -86,6 +86,17 @@ return [
     |
     */
 
-    'prefix' => 'laravel',
+    'prefix' => 'COSAL',
+
+    /*
+    |--------------------------------------------------------------------------
+    | Attribute zizaco/entrust need Cache
+    |--------------------------------------------------------------------------
+    |
+    | Attribute necesary for package zizaco/entrust
+    |
+    |
+     */
+    'ttl' => 20
 
 ];

@@ -160,7 +160,7 @@
                                         Salir
                                     </a>
 
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                    <form id="logout-form" action="/core/logout" method="POST" style="display: none;">
                                         {{ csrf_field() }}
                                         <input type="submit" value="logout" style="display: none;">
                                     </form>

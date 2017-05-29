@@ -4,13 +4,15 @@
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <link href="{{ asset('/css/bootstrap.css') }}" rel="stylesheet" type="text/css" />
-    <link href="{{ asset('/css/adminlte-app.css') }}" rel="stylesheet" type="text/css" />
-    <link href="{{ asset('/css/skins/skin-blue-light.css') }}" rel="stylesheet" type="text/css" />
-    <link href="{{ asset('/css/skins/_all-skins.min.css') }}" rel="stylesheet" type="text/css" />
-    <link href="{{ asset('/css/app.css') }}" rel="stylesheet" type="text/css" />
-    <link href="{{ asset('/css/multi-select.css') }}" rel="stylesheet" type="text/css" />
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    <link href="/core/public/css/bootstrap.css" rel="stylesheet" type="text/css" />
+    <link href="/core/public/css/adminlte-app.css" rel="stylesheet" type="text/css" />
+    <link href="/core/public/css/skins/skin-blue-light.css" rel="stylesheet" type="text/css" />
+    <link href="/core/public/css/skins/_all-skins.min.css" rel="stylesheet" type="text/css" />
+    <link href="/core/public/css/app.css" rel="stylesheet" type="text/css" />
+    <link href="/core/public/css/multi-select.css" rel="stylesheet" type="text/css" />
+    <link href="/core/public/css/select2.min.css" rel="stylesheet" type="text/css" />
+    <link href="/core/public/css/select2-bootstrap.css" rel="stylesheet" type="text/css" />
+    <link href="/core/public/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->

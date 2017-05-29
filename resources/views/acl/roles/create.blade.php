@@ -14,33 +14,21 @@
                         <label for="name" class="col-sm-2 control-label">Name:</label>
                         <div class="col-sm-10">
                             <input type="text" class="form-control" name="name">
-                            @if ($errors->has('name'))
-                                <span class="help-block">
-                                    <strong>{{ $errors->first('name') }}</strong>
-                                </span>
-                            @endif
+                            {!! $errors->first('name', '<span class="help-block">:message</span>')!!}
                         </div>
                     </div>
                     <div class="form-group {{ $errors->has('display_name') ? 'has-error' : ''}}">
                         <label for="display_name" class="col-sm-2 control-label">Display Name:</label>
                         <div class="col-sm-10">
                             <input type="text" class="form-control" name="display_name">
-                            @if ($errors->has('display_name'))
-                                <span class="help-block">
-                                    <strong>{{ $errors->first('display_name') }}</strong>
-                                </span>
-                            @endif
+                            {!! $errors->first('display_name', '<span class="help-block">:message</span>')!!}
                         </div>
                     </div>
                     <div class="form-group {{ $errors->has('description') ? 'has-error' : ''}}">
                         <label for="description" class="col-sm-2 control-label">Description:</label>
                         <div class="col-sm-10">
                             <input type="text" class="form-control" name="description">
-                            @if ($errors->has('description'))
-                                <span class="help-block">
-                                    <strong>{{ $errors->first('description') }}</strong>
-                                </span>
-                            @endif
+                            {!! $errors->first('description', '<span class="help-block">:message</span>')!!}
                         </div>
                     </div>
                     <div class="form-group">

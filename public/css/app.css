@@ -1,3 +1,20 @@
 .font-bold {
     font-weight: bold;
 }
+.color-green{
+    color: green;
+}
+.color-red{
+    color:red;
+}
+.bg-green{
+    background: green;
+}
+.bg-red{
+    background: red;
+}
+.icon-status{
+    display: inline-block;
+    height: 12px;
+    width: 12px;
+}

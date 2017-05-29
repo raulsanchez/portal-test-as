@@ -11,9 +11,9 @@
                 <form action="{{ route('permissions.store') }}" method="post" class="form-horizontal">
                     {{ csrf_field() }}
                     <div class="form-group {{ $errors->has('name') ? ' has-error' : '' }}">
-                        <label for="name" class="col-sm-2 control-label">Identificador:</label>
+                        {!! Form::label('name', 'Identificador :', ['class' => 'col-sm-2 control-label']) !!}
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" name="name" placeholder="grupo.modulo.accion">
+                        {!! Form::text('name', old('name'), ['class' => 'form-control', 'placeholder' => 'grupo.modulo.accion', 'required' => 'true']) !!}
                             @if ($errors->has('name'))
                                 <span class="help-block">
                                     <strong>{{ $errors->first('name') }}</strong>
@@ -22,9 +22,9 @@
                         </div>
                     </div>
                     <div class="form-group {{ $errors->has('display_name') ? 'has-error' : ''}}">
-                        <label for="display_name" class="col-sm-2 control-label">Nombre:</label>
+                        {!! Form::label('display_name', 'Nombre :', ['class' => 'col-sm-2 control-label']) !!}
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" name="display_name" placeholder="Modulo Accion">
+                            {!! Form::text('display_name', old('display_name'), ['class' => 'form-control', 'placeholder' => 'Modulo Accion', 'required' => 'true']) !!}
                             @if ($errors->has('display_name'))
                                 <span class="help-block">
                                     <strong>{{ $errors->first('display_name') }}</strong>
@@ -33,9 +33,9 @@
                         </div>
                     </div>
                     <div class="form-group {{ $errors->has('description') ? 'has-error' : ''}}">
-                        <label for="description" class="col-sm-2 control-label">Descripción:</label>
+                        {!! Form::label('description', 'Descripción :', ['class' => 'col-sm-2 control-label']) !!}
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" name="description" placeholder="Descripción del permiso">
+                            {!! Form::text('description', old('description'), ['class' => 'form-control', 'placeholder' => 'Descripción del permiso', 'required' => 'true']) !!}
                             @if ($errors->has('description'))
                                 <span class="help-block">
                                     <strong>{{ $errors->first('description') }}</strong>

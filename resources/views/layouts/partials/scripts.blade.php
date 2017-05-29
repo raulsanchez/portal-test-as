@@ -1,18 +1,26 @@
 <!-- REQUIRED JS SCRIPTS -->
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.js"></script>
+<script src="/core/public/js/jquery.js"></script>
 
-<script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+<script src="/core/public/js/jquery-ui.min.js"></script>
 
 <script>
   $.widget.bridge('uibutton', $.ui.button);
 </script>
 
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="/core/public/js/bootstrap.min.js"></script>
 
 
-<script src="{{ asset('/js/jquery.multi-select.js') }}"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/js/bootstrap-multiselect.min.js" charset="utf-8"></script>
+<script src="/core/public/js/jquery.multi-select.js"></script>
+<script src="/core/public/js/bootstrap-multiselect.min.js"></script>
+<script src="/core/public/js/select2.full.min.js"></script>
+<script src="/core/public/js/layouts.js"></script>
+<script type="text/javascript">
 
-<script src="{{ asset('/js/layouts.js') }}"></script>
-
+$(".sidebar-menu").load("/core/menu",window.location.pathname, function(){
+    console.log('termino');
+});
+$(document).ready(function() {
+    $(".select2").select2();
+});
+</script>

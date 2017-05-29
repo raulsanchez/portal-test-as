@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 @section('htmlheader')
     @include('layouts.partials.htmlheader')
